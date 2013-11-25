@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todon</title>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= include_gon %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/favicon/favicon.png">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-4">
+          <!-- Logo and site link -->
+          <div class="logo">
+            <h1><a href="<%= get_root_url %>">Todon<span class="color">.</span></a></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <% if logged_in? %>
+    <div class="navbar bs-docs-nav" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+          <!-- Navigation links starts here -->
+          <ul class="nav navbar-nav">
+            <!-- Main menu -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">設定<b class="caret"></b></a>
+              <!-- Submenus -->
+              <ul class="dropdown-menu">
+                <li><a href="<%= tags_url %>">タグ設定</a></li>
+              </ul>
+            </li>
+            <li><a href=<%= logout_url %>>ログアウト</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <% else %>
+    <br>
+    <% end %>
+
+  <div class="content">
+    <div class="container">
+      <% if flash[:error] %>
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <%= flash[:error] %>
+        </div>
+      <% elsif flash[:notice] %>
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="col-md-12">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+<footer>
+	  <div class="row">
+      <div class="col-md-12"><p class="copy">
+        Copyright © Todon
+      </p></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

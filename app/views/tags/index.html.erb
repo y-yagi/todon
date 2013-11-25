@@ -1,0 +1,11 @@
+<h3 class="text-info">タグ一覧</h3>
+<% @tags.each_with_index do |tag, i| %>
+    <a href="<%= tag_url(tag) %>" data-method="delete" data-confirm="指定されたタグを削除します。宜しいですか?"><button type="button" class="badge"><%= tag.name %>&nbsp;&nbsp;&times;</button></a>&nbsp;&nbsp;&nbsp;
+<% end %>
+<br>
+<div class="bor"></div>
+<h3 class="text-info">新規タグ作成</h3>
+<%= form_for(@tag, :html => {class: 'form-inline'}) do |f| %>
+  <%= f.text_field :name, class: 'form-control', placeholder: 'タグ名', style: 'width: 300px' %>
+  <%= f.submit(class: 'btn btn-default', value: '作成する') %>
+<% end %>

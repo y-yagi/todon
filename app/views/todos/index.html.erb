@@ -1,0 +1,49 @@
+<div class="row"><div class="col-md-12">
+  <div class="hero">
+    <h3><span>Todo一覧</span></h3>
+  </div>
+  表示内容を変更する：<br>
+  <% #TODO: リンク %>
+  <strong><%= link_to '終ってないタスク', todos_url %></strong>&nbsp;&nbsp;
+  <strong><%= link_to '期限切れ', todos_url %></strong>&nbsp;&nbsp;
+  <strong><%= link_to '終ったタスク', todos_url %></strong>&nbsp;&nbsp;
+  <br><br>
+  <%= form_for(@todo, :html => {"data-bind" => "submit: addTodo", class: 'form-inline'}, remote: true) do |f| %>
+    <div class="input-group">
+      <label for="todo_tag_id">タグ選択：</label>
+      <%= f.select(:tag_id, @tags.map{|t| [t.name,  t.id] }, {include_blank: true}, {class: 'form-control_select', 'data-bind' => "value: newTodoTag"}) %>&nbsp;&nbsp;&nbsp;&nbsp;
+      <label for="todo_end_date_3i">期限：</label>
+      <%= f.date_select(:end_date, {include_blank: true, end_year: Date.today.year + 1, start_year: Date.today.year}, {class: 'form-control_select', width: '10%'}) %>
+    </div>
+    <div class="input-group">
+      <%= f.text_field :detail, class: 'form-control', placeholder: 'しなきゃいけないこと', "data-bind" => "value: newTodoDetail" %>
+      <span class="input-group-btn">
+        <%# <%= f.submit('作成!', class: 'btn btn-default') %>
+        <%= f.submit('作成!', class: 'btn btn-default', 'data-bind' => "enable: newTodoDetail") %>
+      </span>
+    </div>
+  <% end %>
+  <br>
+  <div class="career">
+    <div class="tabbable tabs-left">
+       <!-- Tabs -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#all" data-toggle="tab">全て</a></li>
+        <% @tags.each do |t| %>
+          <li><a href="#tab<%= t.id %>" data-toggle="tab"><%= t.name %></a></li>
+        <% end %>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="all">
+          <%= render 'todos', {tag_id: 'all', tag_name: 'all'} %>
+        </div>
+        <% @tags.each do |t| %>
+        <div class="tab-pane" id="tab<%= t.id %>">
+          <%= render 'todos', {tag_id: t.id, tag_name: t.name} %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div></div>
+<br>

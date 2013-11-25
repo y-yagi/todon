@@ -1,0 +1,5 @@
+l = self.todos['all']().length - 1;
+last_todo = self.todos['all']()[l];
+if (last_todo) {
+  last_todo.id(<%= @todo.id %>);
+}

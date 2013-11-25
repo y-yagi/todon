@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: todon
+  pool: 5
+  username: todon
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: todon_test
+  pool: 5
+  username: todon
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: todon
+  pool: 5
+  username: todon
+  password:
