@@ -8,9 +8,11 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require ../../../vendor/assets/stylesheets/bootstrap
  *= require_tree ../../../vendor/assets/stylesheets/.
  *= require_self
  */
+
 .todo_date{color:#878787;font-size:.80em;text-align:right;padding-right:.6em;white-space:nowrap;}
 .form-control_select {
   height: 34px;
@@ -27,4 +29,8 @@
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
           transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
-
+.form-control_select:focus {
+    border-color: #66AFE9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+}

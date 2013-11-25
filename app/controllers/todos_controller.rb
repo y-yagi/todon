@@ -2,7 +2,11 @@ class TodosController < ApplicationController
   before_action :set_todo, only: [:show, :edit, :update, :destroy]
 
   def index
-    @todos = Todo.active.user(current_user).order(:priority)
+    if params[:finished]
+      @todos = Todo.finished.user(current_user).order(:priority)
+    else
+      @todos = Todo.active.user(current_user).order(:priority)
+    end
     @tags = Tag.active.user(current_user)
     gon.tags, gon.todos = {}, @todos
     @tags.each{|t| gon.tags[t.id] = t.name}
@@ -31,23 +35,9 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.save
         format.html { redirect_to todos_url, notice: "新しいタスクを登録しました" }
-        format.json { render action: 'show', status: :created, location: @todo }
         format.js
       else
         format.html { render action: 'new' }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    @tags = Tag.active.current_user(current_user)
-    respond_to do |format|
-      if @todo.update(todo_params)
-        format.html { redirect_to todos_url, notice: "新しいタスクを登録しました" }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end

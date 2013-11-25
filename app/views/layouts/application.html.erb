@@ -6,11 +6,12 @@
   <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= include_gon %>
+  <%# include_gon だとphantomjsでエラーが発生する %>
+  <%= Gon::Base.render_data({}) %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <!-- Favicon -->
-  <link rel="shortcut icon" href="/assets/favicon/favicon.png">
+  <link rel="shortcut icon" href="/assets/favicon.icon">
 </head>
 <body>
   <header>

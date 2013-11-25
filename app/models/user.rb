@@ -7,12 +7,20 @@
 #  uid        :string(255)
 #  name       :string(255)
 #  email      :string(255)
-#  deleted    :boolean
+#  deleted    :boolean          default(FALSE)
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class User < ActiveRecord::Base
+
+  validates :provider,
+    length: { maximum: 255 }
+  validates :name,
+    length: { maximum: 255 }
+  validates :email,
+    length: { maximum: 255 }
+
   def self.from_omniauth(auth)
     find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)
   end
@@ -25,5 +33,6 @@ class User < ActiveRecord::Base
       user.email = auth["info"]["email"]
     end
     Tag.create_default_tags(user)
+    user
   end
 end

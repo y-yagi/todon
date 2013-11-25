@@ -12,9 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
-//= require knockout
-//= require_tree .
+//= require ../../../vendor/assets/javascripts/bootstrap
+//= require ../../../vendor/assets/javascripts/knockout
 //= require_tree ../../../vendor/assets/javascripts/.
+//= require_tree .
 //= require_self
 

@@ -16,6 +16,10 @@ class Tag < ActiveRecord::Base
   scope :active, -> { where(deleted: false) }
   scope :user, ->(user) { where('user_id = ?', user.id) }
 
+  validates :name,
+    presence: true,
+    length: { maximum: 255 }
+
   def self.create_default_tags(user)
     Tag.create!(name: '仕事', user_id: user.id)
     Tag.create!(name: '趣味', user_id: user.id)

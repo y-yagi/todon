@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
-gem 'rails', '4.0.1'
+gem 'rails', '4.1.0'
+gem 'sass-rails', '~> 4.0.3'
 gem 'pg'
-gem 'less-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
@@ -11,12 +10,10 @@ gem 'jbuilder', '~> 1.2'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'gon'
-gem 'bower-rails', '~> 0.4.4'
+gem 'gon', '~>4.1.0'
 
 group :development do
   gem 'capistrano'
-  gem 'capistrano-ext'
 end
 
 group :development, :test do
@@ -32,19 +29,19 @@ group :development, :test do
   gem 'bullet'
   gem 'binding_of_caller'
   gem 'guard-minitest'
+  gem 'spring'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
 end
 
 group :test do
-  gem 'minitest'
+  gem 'database_cleaner'
   gem 'minitest-matchers'
   gem 'minitest-metadata'
-  gem 'database_cleaner'
-  gem 'capybara'
   gem 'capybara-webkit'
-  gem 'capybara-email'
-  gem 'turn'
   gem 'ruby-prof'
   gem 'webmock'
+  gem 'minitest-reporters'
 end
 
 

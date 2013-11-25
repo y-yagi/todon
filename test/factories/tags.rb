@@ -2,8 +2,13 @@
 
 FactoryGirl.define do
   factory :tag do
-    user_id user
     name { Faker::Lorem.word }
     deleted false
+
+    trait :with_user do
+      before(:create) { |blog| blog.user = create(:user) }
+    end
+
+    factory :todo_with_user, traits: [:user]
   end
 end

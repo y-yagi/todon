@@ -1,7 +1,30 @@
 require 'test_helper'
-require "minitest/autorun"
 
 describe Todo do
+  describe '#detail ' do
+    valid_data = %w(あああ abc %-\!)
+    valid_data.each do |dt|
+      describe "detailが'#{dt}'のとき" do
+        it 'validになること' do
+          todo = build(:todo, detail: dt)
+          todo.valid_attribute?(:detail).must_equal true
+        end
+      end
+    end
+
+    describe "タイトルが255文字のとき" do
+      it 'validになること' do
+        todo = build(:todo, detail: 'a' * 255)
+        todo.valid_attribute?(:detail).must_equal true
+      end
+    end
+    describe "タイトルが256文字のとき" do
+      it 'invalidになること' do
+        todo = build(:todo, detail: 'a' * 256)
+        todo.valid_attribute?(:detail).must_equal false
+      end
+    end
+  end
   describe '.build' do
     describe 'paramsとuserが渡された場合' do
       before do
