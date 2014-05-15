@@ -15,6 +15,7 @@
 //= require ../../../vendor/assets/javascripts/bootstrap
 //= require ../../../vendor/assets/javascripts/knockout
 //= require_tree ../../../vendor/assets/javascripts/.
+//= require vue
 //= require_tree .
 //= require_self
 

@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
+
 gem 'rails', '4.1.0'
 gem 'sass-rails', '~> 4.0.3'
 gem 'pg'
@@ -11,6 +13,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'gon', '~>4.1.0'
+gem 'rails-assets-vue'
 
 group :development do
   gem 'capistrano'
