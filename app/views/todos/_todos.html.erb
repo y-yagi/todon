@@ -1,17 +1,15 @@
-        <div class="tab-pane active" id="#tab<%= tag_id%>">
           <div class="logreg" style="background: white"><div class="raw">
             <table class="table table-hover">
-              <tbody data-bind="sortable: { data: todos['<%= tag_name %>'], afterMove: sendSorData, options: { handle: '.sortableHandle', cursor: 'move' } }">
-                <tr data-bind="enable: id" >
+              <tbody>
+              <tr v-repeat="todos | filterByTag <%= tag_name %>" class="item-{{$index}}">
                   <td class="sortableHandle">
-                    <span class="badge" data-bind="text: tag"></span>&nbsp;&nbsp;
-                    <span class="todo_detail" data-bind="text: detail"></span>
+                    <span class="badge">{{tag}}</span>&nbsp;&nbsp;
+                    <span class="todo_detail">{{detail}}</span>
                   </td>
-                  <td>
-                    <a data-bind="attr: {'href': delete_url}, 'click': removeTodo" data-method="delete" data-remote="true"><span class="icon-trash icon-2x" /></a>
+                    <td>
+                    <a v-if="id" v-on='click: removeTodo(this)' data-method="delete" data-remote="true" href="{{delete_url}}"><span class="icon-trash icon-2x" /></a>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div></div>
-        </div>

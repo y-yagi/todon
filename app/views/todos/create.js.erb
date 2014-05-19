@@ -1,5 +1,5 @@
-l = self.todos['all']().length - 1;
-last_todo = self.todos['all']()[l];
+var l = self.app.$data.todos.length - 1;
+var last_todo = self.app.$data.todos[l];
 if (last_todo) {
-  last_todo.id(<%= @todo.id %>);
+  last_todo.id = <%= @todo.id %>;
 }

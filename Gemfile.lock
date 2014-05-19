@@ -281,6 +281,7 @@ DEPENDENCIES
   bullet
   capistrano
   capybara-webkit
+  coffee-rails
   database_cleaner
   factory_girl_rails
   faker
