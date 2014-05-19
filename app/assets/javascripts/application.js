@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require ../../../vendor/assets/javascripts/bootstrap
-//= require ../../../vendor/assets/javascripts/knockout
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require vue
 //= require_tree .
