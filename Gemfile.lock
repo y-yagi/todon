@@ -111,6 +111,8 @@ GEM
     json (1.8.1)
     jwt (0.1.11)
       multi_json (>= 1.5)
+    launchy (2.4.2)
+      addressable (~> 2.3)
     libv8 (3.16.14.3)
     listen (2.7.1)
       celluloid (>= 0.15.2)
@@ -289,6 +291,7 @@ DEPENDENCIES
   guard-minitest
   jbuilder (~> 1.2)
   jquery-rails
+  launchy
   minitest-matchers
   minitest-metadata
   minitest-reporters

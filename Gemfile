@@ -46,6 +46,7 @@ group :test do
   gem 'ruby-prof'
   gem 'webmock'
   gem 'minitest-reporters'
+  gem 'launchy'
 end
 
 
