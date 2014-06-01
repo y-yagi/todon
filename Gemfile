@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
-gem 'rails', '4.1.0'
+gem 'rails', '4.1.2.rc1'
 gem 'sass-rails', '~> 4.0.3'
 gem 'coffee-rails'
 gem 'pg'
@@ -39,6 +39,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'minitest'
   gem 'database_cleaner'
   gem 'minitest-matchers'
   gem 'minitest-metadata'
