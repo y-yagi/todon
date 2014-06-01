@@ -5,7 +5,7 @@ require 'capybara/rails'
 require 'minitest/spec'
 require 'minitest/autorun'
 require 'minitest/reporters'
-require 'pry-rescue/minitest'
+#require 'pry-rescue/minitest'
 
 include FactoryGirl::Syntax::Methods
 
