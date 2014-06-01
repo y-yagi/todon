@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actionmailer (4.1.2.rc1)
       actionpack (= 4.1.2.rc1)
@@ -110,6 +111,8 @@ GEM
     json (1.8.1)
     jwt (0.1.11)
       multi_json (>= 1.5)
+    launchy (2.4.2)
+      addressable (~> 2.3)
     libv8 (3.16.14.3)
     listen (2.7.1)
       celluloid (>= 0.15.2)
@@ -201,6 +204,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.2.rc1)
       sprockets-rails (~> 2.0)
+    rails-assets-vue (0.10.4)
     rails-footnotes (4.0.0)
       rails (>= 3.2)
     rails_12factor (0.0.2)
@@ -279,6 +283,7 @@ DEPENDENCIES
   bullet
   capistrano
   capybara-webkit
+  coffee-rails
   database_cleaner
   factory_girl_rails
   faker
@@ -286,6 +291,8 @@ DEPENDENCIES
   guard-minitest
   jbuilder (~> 1.2)
   jquery-rails
+  launchy
+  minitest
   minitest-matchers
   minitest-metadata
   minitest-reporters
@@ -299,6 +306,7 @@ DEPENDENCIES
   pry-rescue
   pry-stack_explorer
   rails (= 4.1.2.rc1)
+  rails-assets-vue
   rails-footnotes
   rails_12factor
   ruby-prof

@@ -1,10 +1,4 @@
-<script type="text/javascript">
-$(document).ready(function() {
-    $('.datepicker').datepicker();
-})
-</script>
-
-<div class="row"><div class="col-md-12">
+<div class="row" id="todoapp"><div class="col-md-12">
   <div class="hero">
     <h3><span>Todo一覧</span></h3>
   </div>
@@ -18,15 +12,15 @@ $(document).ready(function() {
 
   <div class="contact">
     <div class="cwell">
-    <%= form_for(@todo, :html => {"data-bind" => "submit: addTodo", class: 'form-inline'}, remote: true) do |f| %>
+      <%= form_for(@todo, :html => {'v-on' => 'submit: addTodo', class: 'form-inline'}, remote: true) do |f| %>
       <div class="input-group">
-        <%= f.select(:tag_id, @tags.map{|t| [t.name,  t.id] }, {prompt: "タグ選択"}, {class: 'form-control_select', 'data-bind' => "value: newTodoTag"}) %>
+        <%= f.select(:tag_id, @tags.map{|t| [t.name,  t.id] }, {prompt: "タグ選択"}, {class: 'form-control_select', 'v-model' => 'newTag'}) %>
       </div>
       <div class="input-group">
-        <%= f.text_field :detail, class: 'form-control', placeholder: 'しなきゃいけないこと', "data-bind" => "value: newTodoDetail" %>
+        <%= f.text_field :detail, class: 'form-control', placeholder: 'しなきゃいけないこと', 'v-model' => 'newDetail' %>
+
         <span class="input-group-btn">
           <%= f.submit('作成!', class: 'btn btn-default') %>
-          <%# <%= f.submit('作成!', class: 'btn btn-default', 'data-bind' => "enable: newTodoDetail") %>
         </span>
       </div>
     <% end %>
@@ -37,17 +31,17 @@ $(document).ready(function() {
     <div class="tabbable tabs-left">
        <!-- Tabs -->
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#all" data-toggle="tab">全て</a></li>
+        <li class="active"><a href="#tag-all" data-toggle="tab">全て</a></li>
         <% @tags.each do |t| %>
-          <li><a href="#tab<%= t.id %>" data-toggle="tab"><%= t.name %></a></li>
+          <li><a href="#tag-<%= t.id %>" data-toggle="tab"><%= t.name %></a></li>
         <% end %>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane active" id="all">
-          <%= render 'todos', {tag_id: 'all', tag_name: 'all'} %>
+        <div class="tab-pane active" id="tag-all">
+          <%= render 'todos', {tag_id: 'all', tag_name: ''} %>
         </div>
         <% @tags.each do |t| %>
-        <div class="tab-pane" id="tab<%= t.id %>">
+        <div class="tab-pane" id="tag-<%= t.id %>">
           <%= render 'todos', {tag_id: t.id, tag_name: t.name} %>
         </div>
         <% end %>

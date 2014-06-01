@@ -32,10 +32,6 @@ describe "todo管理テストIntegration" do
       page.execute_script %($('.icon-trash').click())
     end
 
-    it '作成したtodoが表示されないこと', js: true do
-      page.text.wont_include 'テスト用todo'
-    end
-
     it 'DBからデータが削除されていること', js: true do
       sleep 0.1
       Todo.active.where(user_id: @current_user.id, detail: 'テスト用todo').count.must_equal 0

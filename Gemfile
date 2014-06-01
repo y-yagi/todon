@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
+
 gem 'rails', '4.1.2.rc1'
 gem 'sass-rails', '~> 4.0.3'
+gem 'coffee-rails'
 gem 'pg'
 gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer', platforms: :ruby
@@ -11,6 +14,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'gon', '~>4.1.0'
+gem 'rails-assets-vue'
 
 group :development do
   gem 'capistrano'
@@ -35,6 +39,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'minitest'
   gem 'database_cleaner'
   gem 'minitest-matchers'
   gem 'minitest-metadata'
@@ -42,6 +47,7 @@ group :test do
   gem 'ruby-prof'
   gem 'webmock'
   gem 'minitest-reporters'
+  gem 'launchy'
 end
 
 

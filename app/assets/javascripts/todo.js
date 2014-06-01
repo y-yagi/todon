@@ -1,50 +1,52 @@
 $(function() {
-  function Todo(data) {
-    this.detail = ko.observable(data.detail);
-    this.priority = ko.observable(data.priority);
-    this.tag = ko.observable(gon.tags[data.tag]);
-    this.id = ko.observable(data.id);
-    this.delete_url = "/todos/" + this.id();
-  }
-
-  var TodoListViewModel = function() {
-    self.todos = {};
-    self.todos['all'] = ko.observableArray();
-    for(tag in gon.tags) {
-      self.todos[gon.tags[tag]] = ko.observableArray();
+  var Todo;
+  Todo = (function() {
+    function Todo(detail, tag, priority, id) {
+      this.detail = detail;
+      this.tag = gon.tags[tag];
+      this.id = id;
+      this.priority = priority;
+      this.delete_url = "/todos/" + id;
     }
-    self.newTodoDetail = ko.observable();
-    self.newTodoTag = ko.observable();
-    self.addTodo = function() {
-      var todo = new Todo({ detail: self.newTodoDetail(), tag: self.newTodoTag()});
-      if (todo.detail() == undefined) return;
-      self.todos['all'].push(todo);
-      if(todo.tag() && todo.tag().length > 0) {
-        self.todos[todo.tag()].push(todo);
-      }
-    };
+    return Todo;
+  })();
 
-    self.removeTodo = function(todo) {
-      self.todos['all'].remove(todo)
-    };
-  }.bind(this);
-
-  ko.applyBindings(new TodoListViewModel());
-
+  var todos = new Array();
   for(l = gon.todos.length, i = 0; i < l; i++) {
-    var todo = new Todo({ detail: gon.todos[i].detail, tag: gon.todos[i].tag_id, id: gon.todos[i].id})
-    self.todos['all'].push(todo);
-    if(todo.tag() && todo.tag().length > 0) {
-      self.todos[todo.tag()].push(todo);
-    }
+    var todo = new Todo(gon.todos[i].detail, gon.todos[i].tag_id, gon.todos[i].priority, gon.todos[i].id);
+    todos.push(todo);
   }
-});
 
-function sendSorData(ui, e) {
-  var todoList = ui.sourceParent();
-  var ids = new Array();
-  for (i = 0, l = todoList.length; i < l; i++) {
-    ids.push(todoList[i].id());
-  }
-  $.post("/todos/sort", { ids: ids } );
-};
+  Vue.filter('filterByTag', function (todos, tag) {
+    if (!tag) {
+      return todos;
+    }
+
+    var result = []
+    for(var i = 0, l = todos.length; i < l; i++) {
+      if (todos[i].tag == tag) {
+        result.push(todos[i]);
+      }
+    }
+    return result;
+  })
+
+  var app = new Vue({
+    el: '#todoapp',
+    data: { todos: todos, newDetail: '', newTag: ''},
+    methods: {
+      addTodo: function() {
+        var value = this.newDetail && this.newDetail.trim();
+        if (!value) {
+          return;
+        }
+        var todo = new Todo(this.newDetail, this.newTag, '',  '');
+        this.newDetail = '';
+        return this.todos.push(todo);
+      },
+      removeTodo: function(todo) {
+        return this.todos.$remove(todo.$parent.$data);
+      }
+    }
+  })
+});
