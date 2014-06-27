@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
-gem 'rails', '4.1.2.rc1'
+gem 'rails', '4.1.2'
 gem 'sass-rails', '~> 4.0.3'
 gem 'coffee-rails'
 gem 'pg'
@@ -43,10 +43,11 @@ group :test do
   gem 'database_cleaner'
   gem 'minitest-matchers'
   gem 'minitest-metadata'
+  gem 'minitest-reporters'
+  gem 'minitest-sound'
   gem 'capybara-webkit'
   gem 'ruby-prof'
   gem 'webmock'
-  gem 'minitest-reporters'
   gem 'launchy'
 end
 
