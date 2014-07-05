@@ -5,6 +5,7 @@ require 'capybara/rails'
 require 'minitest/spec'
 require 'minitest/autorun'
 require 'minitest/reporters'
+require 'minitest/sound/reporter'
 #require 'pry-rescue/minitest'
 
 include FactoryGirl::Syntax::Methods
@@ -49,7 +50,12 @@ class IntegrationSpec < MiniTest::Spec
   OmniAuth.config.test_mode = true
 end
 MiniTest::Spec.register_spec_type(/Integration/, IntegrationSpec)
-#Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
+
+Minitest::Sound.success = '/home/yaginuma/tmp/success.mp3'
+Minitest::Sound.failure = '/home/yaginuma/tmp/failure.mp3'
+Minitest::Sound.during_test = '/home/yaginuma/tmp/during_test.mp3'
+
+Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Sound::Reporter.new]
 
 
 module ValidateAttribute
@@ -67,9 +73,6 @@ end
 
 ActiveRecord::Base.send(:include, ValidateAttribute) if defined?(ActiveRecord::Base)
 
-Minitest::Sound.success = '/home/yaginuma/tmp/success.mp3'
-Minitest::Sound.failure = '/home/yaginuma/tmp/failure.mp3'
-Minitest::Sound.during_test = '/home/yaginuma/tmp/during_test.mp3'
 
 
 def login
