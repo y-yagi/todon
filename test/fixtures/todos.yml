@@ -1,0 +1,15 @@
+DEFAULTS: &DEFAULTS
+  tag: test_tag
+  priority: <%= rand(10) %>
+  end_date: <%= 5.days.since.to_date %>
+  deleted: false
+
+test_todo:
+  detail: 'テスト用TODO'
+  user: google
+  <<: *DEFAULTS
+
+integration_todo:
+  detail: 'integration todo'
+  user_id: 1234
+  <<: *DEFAULTS

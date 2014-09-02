@@ -2,37 +2,25 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
-require 'minitest/spec'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/sound/reporter'
+require 'minitest/metadata'
 #require 'pry-rescue/minitest'
 
-include FactoryGirl::Syntax::Methods
-
 class ActiveSupport::TestCase
-  ActiveRecord::Migration.check_pending!
+  fixtures :all
 end
 
-class MiniTest::Spec
-  DatabaseCleaner.strategy = :transaction
-  before do
-    DatabaseCleaner.start
-  end
-
-  after do
-    DatabaseCleaner.clean
-  end
-end
-
-class IntegrationSpec < MiniTest::Spec
+class ActionDispatch::IntegrationTest
   include Capybara::DSL
-#  include Capybara::Assertions
-  include Rails.application.routes.url_helpers
+  include MiniTest::Metadata
 
-  DatabaseCleaner.strategy = :truncation
+  OmniAuth.config.test_mode = true
 
+  Capybara.default_driver = :rack_test
   Capybara.javascript_driver = :webkit
+
   WebMock.disable_net_connect!(allow_localhost: true)
 
   before do
@@ -46,10 +34,7 @@ class IntegrationSpec < MiniTest::Spec
   after do
     Capybara.reset_sessions!
   end
-
-  OmniAuth.config.test_mode = true
 end
-MiniTest::Spec.register_spec_type(/Integration/, IntegrationSpec)
 
 Minitest::Sound.success = '/home/yaginuma/tmp/success.mp3'
 Minitest::Sound.failure = '/home/yaginuma/tmp/failure.mp3'
@@ -72,8 +57,6 @@ module ValidateAttribute
 end
 
 ActiveRecord::Base.send(:include, ValidateAttribute) if defined?(ActiveRecord::Base)
-
-
 
 def login
   visit login_path
