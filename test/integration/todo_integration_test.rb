@@ -1,40 +1,37 @@
 require 'test_helper'
 
-describe "todo管理テストIntegration" do
+describe 'TodoIntegrationTest' do
   before do
     login
-    @current_user = User.first
+    @current_user = User.find_by(name: 'Example User')
   end
 
   describe 'todoの新規作成を行ったとき' do
     before do
+      Todo.delete_all
       visit todos_path
-      fill_in('todo[detail]', with: 'テストtodo')
+      fill_in('todo[detail]', with: '画面から作成するTodo')
       select('趣味', from: 'todo[tag_id]')
       click_button '作成!'
     end
 
     it '作成したtodoが表示されること', js: true do
-      sleep 0.1
-      page.text.must_include 'テストtodo'
+      page.text.must_include '画面から作成するTodo'
     end
 
-    it 'DBにデータが作成されていること', js: true do
-      sleep 0.1
-      Todo.active.where(user_id: @current_user.id, detail: 'テストtodo').count.must_equal 1
+    it 'DBにデータが作成されていること' do
+      Todo.active.where(user_id: @current_user.id, detail: '画面から作成するTodo').count.must_equal 1
     end
   end
 
   describe 'todoの削除行ったとき' do
     before do
-      create(:todo, user_id: @current_user.id, detail: 'テスト用todo')
       visit todos_path
       page.execute_script %($('.icon-trash').click())
     end
 
     it 'DBからデータが削除されていること', js: true do
-      sleep 0.1
-      Todo.active.where(user_id: @current_user.id, detail: 'テスト用todo').count.must_equal 0
+      Todo.active.where(user_id: @current_user.id, detail: 'integration todo').count.must_equal 0
     end
   end
 end

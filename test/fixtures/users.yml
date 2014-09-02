@@ -1,0 +1,17 @@
+google:
+  provider: google
+  uid: <%= rand(10000).to_s %>
+  name: google_user
+  email: example@google.com
+
+facebook:
+  provider: facebook
+  uid: <%= rand(10000).to_s %>
+  name: facebook_user
+  email: example@facebook.com
+
+twitter:
+  provider: twitter
+  uid: <%= rand(10000).to_s %>
+  name: twitter_user
+  email: example@twitter.com

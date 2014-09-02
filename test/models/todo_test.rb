@@ -6,7 +6,8 @@ describe Todo do
     valid_data.each do |dt|
       describe "detailが'#{dt}'のとき" do
         it 'validになること' do
-          todo = build(:todo, detail: dt)
+          todo = todos(:test_todo)
+          todo.detail= dt
           todo.valid_attribute?(:detail).must_equal true
         end
       end
@@ -14,13 +15,15 @@ describe Todo do
 
     describe "タイトルが255文字のとき" do
       it 'validになること' do
-        todo = build(:todo, detail: 'a' * 255)
+        todo = todos(:test_todo)
+        todo.detail= 'a' * 255
         todo.valid_attribute?(:detail).must_equal true
       end
     end
     describe "タイトルが256文字のとき" do
       it 'invalidになること' do
-        todo = build(:todo, detail: 'a' * 256)
+        todo = todos(:test_todo)
+        todo.detail= 'a' * 256
         todo.valid_attribute?(:detail).must_equal false
       end
     end
@@ -30,7 +33,7 @@ describe Todo do
       before do
         @params =  ActionController::Parameters.new
         @params = {detail: "テスト"}
-        @user = build(:user)
+        @user = users(:google)
         @todo = Todo.build(@user, @params)
       end
 

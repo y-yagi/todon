@@ -1,0 +1,7 @@
+DEFAULTS: &DEFAULTS
+  name: default
+  deleted: false
+
+test_tag:
+  name: 'テスト用タグ'
+  <<: *DEFAULTS
