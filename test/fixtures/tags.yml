@@ -2,6 +2,14 @@ DEFAULTS: &DEFAULTS
   name: default
   deleted: false
 
-test_tag:
-  name: 'テスト用タグ'
+work:
   <<: *DEFAULTS
+  name: 仕事
+
+hobby:
+  <<: *DEFAULTS
+  name: 趣味
+
+travel:
+  <<: *DEFAULTS
+  name: 旅行

@@ -6,8 +6,7 @@ describe Tag do
     valid_data.each do |dt|
       describe "nameが'#{dt}'のとき" do
         it 'validになること' do
-          tag = tags(:test_tag)
-          tag.name = dt
+          tag = Tag.new(name: dt)
           tag.valid_attribute?(:name).must_equal true
         end
       end
@@ -15,16 +14,14 @@ describe Tag do
 
     describe "タグ名が255文字のとき" do
       it 'validになること' do
-        tag = tags(:test_tag)
-        tag.name = 'a' * 255
+        tag = Tag.new(name: 'a' * 255)
         tag.valid_attribute?(:name).must_equal true
       end
     end
 
     describe "タグ名が256文字のとき" do
       it 'invalidになること' do
-        tag = tags(:test_tag)
-        tag.name = 'a' * 256
+        tag = Tag.new(name: 'a' * 256)
         tag.valid_attribute?(:name).must_equal false
       end
     end
