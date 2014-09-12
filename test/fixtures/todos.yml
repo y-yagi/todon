@@ -1,15 +1,19 @@
 DEFAULTS: &DEFAULTS
-  tag: test_tag
-  priority: <%= rand(10) %>
+  priority: 5
   end_date: <%= 5.days.since.to_date %>
   deleted: false
 
-test_todo:
-  detail: 'テスト用TODO'
+travel:
+  <<: *DEFAULTS
+  detail: 旅行の計画決め
   user: google
-  <<: *DEFAULTS
+  tag: travel
+  priority: 3
 
-integration_todo:
-  detail: 'integration todo'
-  user_id: 1234
+
+work:
   <<: *DEFAULTS
+  detail: テスト作成
+  user_id: 1234
+  tag: work
+  priority: 1

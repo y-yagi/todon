@@ -36,9 +36,9 @@ class ActionDispatch::IntegrationTest
   end
 end
 
-Minitest::Sound.success = '/home/yaginuma/tmp/success.mp3'
-Minitest::Sound.failure = '/home/yaginuma/tmp/failure.mp3'
-Minitest::Sound.during_test = '/home/yaginuma/tmp/during_test.mp3'
+Minitest::Sound.success = '/home/yaginuma/Dropbox/tmp/music/other/ff4_09_fanfare.mp3'
+Minitest::Sound.failure = '/home/yaginuma/Dropbox/tmp/music/other/mdai.mp3'
+Minitest::Sound.during_test = '/home/yaginuma/Dropbox/tmp/music/other/rs1_25_beatthemup.mp3'
 
 Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Sound::Reporter.new]
 
