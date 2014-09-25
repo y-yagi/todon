@@ -43,6 +43,7 @@ group :test do
   gem 'minitest-matchers'
   gem 'minitest-metadata'
   gem 'minitest-reporters'
+  gem 'minitest-slow_test', github: 'y-yagi/minitest-slow_test'
   gem 'minitest-sound'
   gem 'minitest-spec-rails'
   gem 'capybara-webkit'
