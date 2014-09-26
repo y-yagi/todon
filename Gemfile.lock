@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/y-yagi/minitest-slow_test.git
+  revision: 3411504d75660d84700e08abb18a6c7ee616159b
+  specs:
+    minitest-slow_test (0.0.1)
+      minitest (>= 5.0)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -297,6 +304,7 @@ DEPENDENCIES
   minitest-matchers
   minitest-metadata
   minitest-reporters
+  minitest-slow_test!
   minitest-sound
   minitest-spec-rails
   omniauth-facebook

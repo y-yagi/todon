@@ -5,6 +5,7 @@ require 'capybara/rails'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/sound/reporter'
+require 'minitest/slow_test/reporter'
 require 'minitest/metadata'
 #require 'pry-rescue/minitest'
 
@@ -40,7 +41,7 @@ Minitest::Sound.success = '/home/yaginuma/Dropbox/tmp/music/other/ff4_09_fanfare
 Minitest::Sound.failure = '/home/yaginuma/Dropbox/tmp/music/other/mdai.mp3'
 Minitest::Sound.during_test = '/home/yaginuma/Dropbox/tmp/music/other/rs1_25_beatthemup.mp3'
 
-Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Sound::Reporter.new]
+Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::SlowTest::Reporter.new, Minitest::Sound::Reporter.new]
 
 
 module ValidateAttribute
