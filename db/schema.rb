@@ -11,40 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724060415) do
+ActiveRecord::Schema.define(version: 20130923065207) do
 
-  create_table "tags", force: true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "tags", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "name",       limit: 255
-    t.boolean  "deleted",                default: false
+    t.string   "name"
+    t.boolean  "deleted",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "todos", force: true do |t|
-    t.integer  "user_id",                                null: false
-    t.string   "detail",     limit: 255,                 null: false
-    t.string   "tag_id",     limit: 255
-    t.integer  "priority",               default: 1
+  create_table "todos", force: :cascade do |t|
+    t.integer  "user_id",                    null: false
+    t.string   "detail",                     null: false
+    t.string   "tag_id"
+    t.integer  "priority",   default: 1
     t.date     "end_date"
-    t.boolean  "deleted",                default: false
+    t.boolean  "deleted",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "todos", ["priority", "deleted"], name: "index_todos_on_priority_and_deleted", using: :btree
 
-  create_table "user_posts_user_todos", id: false, force: true do |t|
-    t.integer "user_todo_id", null: false
-    t.integer "user_post_id", null: false
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "provider",   limit: 255
-    t.string   "uid",        limit: 255
-    t.string   "name",       limit: 255
-    t.string   "email",      limit: 255
-    t.boolean  "deleted",                default: false
+  create_table "users", force: :cascade do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "email"
+    t.boolean  "deleted",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
